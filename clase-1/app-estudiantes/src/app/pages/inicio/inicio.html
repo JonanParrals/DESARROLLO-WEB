@@ -6,7 +6,6 @@
       <h1>Lista de Estudiantes</h1>
       <p class="subtitulo">Angular 22 + .NET 10 | Ejemplo GET</p>
     </div>
-    <!-- Recuadro que indica el endpoint usado -->
     <div class="endpoint">
       <span class="endpoint-icono">&lt;/&gt;</span>
       <div>
@@ -16,12 +15,10 @@
     </div>
   </div>
 
-  <!-- Botón: llama a cargarEstudiantes() y se desactiva mientras carga -->
   <button class="btn" (click)="cargarEstudiantes()" [disabled]="cargando()">
     ⟳ {{ cargando() ? 'Cargando...' : 'Cargar estudiantes' }}
   </button>
 
-  <!-- Solo se muestra si hubo un error -->
   @if (error()) {
     <p class="error">{{ error() }}</p>
   }
@@ -36,21 +33,18 @@
       </tr>
     </thead>
     <tbody>
-      <!-- Repite una fila por cada estudiante -->
       @for (e of estudiantes(); track e.id) {
         <tr>
           <td>{{ e.id }}</td>
           <td>{{ e.nombre }}</td>
           <td>{{ e.curso }}</td>
           <td>
-            <!-- Etiqueta verde si es Activo, amarilla si no -->
             <span class="estado" [class.activo]="e.estado === 'Activo'" [class.inactivo]="e.estado !== 'Activo'">
               ● {{ e.estado }}
             </span>
           </td>
         </tr>
       } @empty {
-        <!-- Se muestra mientras la lista esté vacía -->
         <tr>
           <td colspan="4" class="vacio">Presiona "Cargar estudiantes" para ver la lista</td>
         </tr>
@@ -65,12 +59,11 @@
     <div class="icono azul">☰</div>
     <div class="titulos">
       <h2>Ejercicios</h2>
-      <p class="subtitulo">Realiza los siguientes ejercicios usando solo peticiones GET.</p>
+      <p class="subtitulo">Realiza los siguientes ejercicios usando peticiones HTTP.</p>
     </div>
   </div>
 
   <div class="ejercicios">
-    <!-- routerLink navega a otra pantalla sin recargar la página -->
     <a routerLink="/productos" class="ejercicio verde">
       <span class="numero">1</span>
       <div>
@@ -86,6 +79,16 @@
         <h3>Buscar estudiante por ID</h3>
         <p>Crear una vista que permita ingresar un ID y mostrar la información del estudiante usando GET.</p>
         <span class="ruta">🔍 GET /api/estudiantes/{{ '{' }}id{{ '}' }}</span>
+      </div>
+    </a>
+
+    <!-- NUEVO: tarjeta del CRUD -->
+    <a routerLink="/gestion" class="ejercicio naranja">
+      <span class="numero">3</span>
+      <div>
+        <h3>CRUD de estudiantes</h3>
+        <p>Crear, editar y eliminar estudiantes con formulario, validaciones y confirmación.</p>
+        <span class="ruta">✏️ POST · PUT · DELETE</span>
       </div>
     </a>
   </div>

@@ -158,3 +158,8 @@ h3 { margin: 0 0 8px; color: #1e3a8a; font-size: 20px; }
 .ruta { display: inline-block; padding: 8px 16px; border-radius: 8px; font-weight: 600; }
 .verde .ruta { background: #dcfce7; color: #15803d; }
 .morado .ruta { background: #ede9fe; color: #5b21b6; }
+
+/* ===== Tarjeta 3: CRUD (naranja) ===== */
+.naranja { background: #fff7ed; border: 1px solid #fed7aa; }   /* Fondo y borde naranja claro */
+.naranja .numero { background: #f97316; }                       /* Círculo del número */
+.naranja .ruta { background: #ffedd5; color: #c2410c; }         /* Etiqueta de la ruta */
