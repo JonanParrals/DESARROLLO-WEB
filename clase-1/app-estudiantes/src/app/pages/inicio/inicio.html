@@ -1,0 +1,92 @@
+<!-- ===== Tarjeta 1: Lista de estudiantes ===== -->
+<section class="card">
+  <div class="card-header">
+    <div class="icono azul">👥</div>
+    <div class="titulos">
+      <h1>Lista de Estudiantes</h1>
+      <p class="subtitulo">Angular 22 + .NET 10 | Ejemplo GET</p>
+    </div>
+    <!-- Recuadro que indica el endpoint usado -->
+    <div class="endpoint">
+      <span class="endpoint-icono">&lt;/&gt;</span>
+      <div>
+        <strong>GET /api/estudiantes</strong>
+        <p>Obtiene todos los estudiantes desde la API</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Botón: llama a cargarEstudiantes() y se desactiva mientras carga -->
+  <button class="btn" (click)="cargarEstudiantes()" [disabled]="cargando()">
+    ⟳ {{ cargando() ? 'Cargando...' : 'Cargar estudiantes' }}
+  </button>
+
+  <!-- Solo se muestra si hubo un error -->
+  @if (error()) {
+    <p class="error">{{ error() }}</p>
+  }
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>NOMBRE</th>
+        <th>CURSO</th>
+        <th>ESTADO</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Repite una fila por cada estudiante -->
+      @for (e of estudiantes(); track e.id) {
+        <tr>
+          <td>{{ e.id }}</td>
+          <td>{{ e.nombre }}</td>
+          <td>{{ e.curso }}</td>
+          <td>
+            <!-- Etiqueta verde si es Activo, amarilla si no -->
+            <span class="estado" [class.activo]="e.estado === 'Activo'" [class.inactivo]="e.estado !== 'Activo'">
+              ● {{ e.estado }}
+            </span>
+          </td>
+        </tr>
+      } @empty {
+        <!-- Se muestra mientras la lista esté vacía -->
+        <tr>
+          <td colspan="4" class="vacio">Presiona "Cargar estudiantes" para ver la lista</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</section>
+
+<!-- ===== Tarjeta 2: Ejercicios ===== -->
+<section class="card">
+  <div class="card-header">
+    <div class="icono azul">☰</div>
+    <div class="titulos">
+      <h2>Ejercicios</h2>
+      <p class="subtitulo">Realiza los siguientes ejercicios usando solo peticiones GET.</p>
+    </div>
+  </div>
+
+  <div class="ejercicios">
+    <!-- routerLink navega a otra pantalla sin recargar la página -->
+    <a routerLink="/productos" class="ejercicio verde">
+      <span class="numero">1</span>
+      <div>
+        <h3>Listar productos</h3>
+        <p>Crear una pantalla que muestre la lista de productos obtenidos desde la API usando GET.</p>
+        <span class="ruta">📦 GET /api/productos</span>
+      </div>
+    </a>
+
+    <a routerLink="/buscar" class="ejercicio morado">
+      <span class="numero">2</span>
+      <div>
+        <h3>Buscar estudiante por ID</h3>
+        <p>Crear una vista que permita ingresar un ID y mostrar la información del estudiante usando GET.</p>
+        <span class="ruta">🔍 GET /api/estudiantes/{{ '{' }}id{{ '}' }}</span>
+      </div>
+    </a>
+  </div>
+</section>

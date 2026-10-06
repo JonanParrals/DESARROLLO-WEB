@@ -1,0 +1,56 @@
+/* ===== Caja de búsqueda: input + botón en fila ===== */
+.buscador {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  max-width: 500px;
+}
+.buscador input {
+  flex: 1;                        /* Ocupa todo el espacio disponible */
+  padding: 12px 16px;
+  font-size: 17px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  outline: none;
+}
+.buscador input:focus {           /* Borde morado al hacer clic en la caja */
+  border-color: #6d28d9;
+  box-shadow: 0 0 0 3px #ede9fe;
+}
+
+/* Botón morado (color del Ejercicio 2) */
+.btn-buscar {
+  background: #6d28d9;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 28px;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn-buscar:hover:not(:disabled) { background: #5b21b6; }
+.btn-buscar:disabled { opacity: 0.6; cursor: wait; }
+
+/* ===== Ficha del estudiante encontrado ===== */
+.resultado {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));   /* 4 columnas, o menos si no caben */
+  gap: 16px;
+  background: #f5f3ff;
+  border: 1px solid #ddd6fe;
+  border-radius: 12px;
+  padding: 20px;
+}
+.dato {
+  display: flex;
+  flex-direction: column;         /* Etiqueta arriba, valor abajo */
+  gap: 6px;
+}
+.etiqueta { font-size: 13px; font-weight: 600; color: #64748b; }
+.valor { font-size: 18px; color: #0f172a; }
+
+/* Etiquetas de estado (iguales a las de Inicio) */
+.estado { width: fit-content; padding: 6px 12px; border-radius: 8px; font-size: 14px; }
+.activo { background: #dcfce7; color: #15803d; }
+.inactivo { background: #fef3c7; color: #b45309; }

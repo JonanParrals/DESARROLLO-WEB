@@ -1,0 +1,59 @@
+<a routerLink="/" class="volver">← Volver al inicio</a>
+
+<section class="card">
+  <div class="card-header">
+    <div class="icono morado">🔍</div>
+    <div class="titulos">
+      <h1>Buscar Estudiante por ID</h1>
+      <p class="subtitulo">Ejercicio 2 | Ejemplo GET con parámetro</p>
+    </div>
+    <div class="endpoint">
+      <span class="endpoint-icono">&lt;/&gt;</span>
+      <div>
+        <strong>GET /api/estudiantes/{{ '{' }}id{{ '}' }}</strong>
+        <p>Obtiene un estudiante por su ID</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Caja de búsqueda. #inputId es una "etiqueta" para leer lo que se escribió -->
+  <div class="buscador">
+    <input
+      #inputId
+      type="number"
+      min="1"
+      placeholder="Ingresa un ID (ej. 3)"
+      (keyup.enter)="buscar(inputId.value)" />
+    <button class="btn-buscar" (click)="buscar(inputId.value)" [disabled]="cargando()">
+      🔍 {{ cargando() ? 'Buscando...' : 'Buscar' }}
+    </button>
+  </div>
+
+  @if (error()) {
+    <p class="error">{{ error() }}</p>
+  }
+
+  <!-- Solo aparece si se encontró un estudiante; "as e" le pone un nombre corto -->
+  @if (estudiante(); as e) {
+    <div class="resultado">
+      <div class="dato">
+        <span class="etiqueta">ID</span>
+        <span class="valor">{{ e.id }}</span>
+      </div>
+      <div class="dato">
+        <span class="etiqueta">NOMBRE</span>
+        <span class="valor">{{ e.nombre }}</span>
+      </div>
+      <div class="dato">
+        <span class="etiqueta">CURSO</span>
+        <span class="valor">{{ e.curso }}</span>
+      </div>
+      <div class="dato">
+        <span class="etiqueta">ESTADO</span>
+        <span class="estado" [class.activo]="e.estado === 'Activo'" [class.inactivo]="e.estado !== 'Activo'">
+          ● {{ e.estado }}
+        </span>
+      </div>
+    </div>
+  }
+</section>

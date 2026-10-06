@@ -1,0 +1,132 @@
+<a routerLink="/" class="volver">← Volver al inicio</a>
+
+<section class="card">
+  <div class="card-header">
+    <div class="icono naranja">✏️</div>
+    <div class="titulos">
+      <h1>Gestión de Estudiantes</h1>
+      <p class="subtitulo">CRUD completo | GET · POST · PUT · DELETE</p>
+    </div>
+  </div>
+
+  <!-- Mensajes de éxito (verde) o error (rojo) -->
+  @if (mensaje()) {
+    <p class="exito">✔ {{ mensaje() }}</p>
+  }
+  @if (error()) {
+    <p class="error">{{ error() }}</p>
+  }
+
+  <!-- [formGroup] conecta este formulario con el "form" de gestion.ts -->
+  <form class="formulario" [formGroup]="form" (ngSubmit)="guardar()">
+    <h3>{{ editandoId() === null ? 'Nuevo estudiante' : 'Editando estudiante ID ' + editandoId() }}</h3>
+
+    <div class="campos">
+      <label>
+        Nombre
+        <input formControlName="nombre" placeholder="Ej. Pedro Gómez" />
+        @if (form.controls.nombre.invalid && form.controls.nombre.touched) {
+          <small class="requerido">El nombre es obligatorio</small>
+        }
+      </label>
+
+      <label>
+        Curso
+        <input formControlName="curso" placeholder="Ej. Física" />
+        @if (form.controls.curso.invalid && form.controls.curso.touched) {
+          <small class="requerido">El curso es obligatorio</small>
+        }
+      </label>
+
+      <label>
+        Estado
+        <select formControlName="estado">
+          <option value="Activo">Activo</option>
+          <option value="Inactivo">Inactivo</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="acciones-form">
+      <button type="submit" class="btn-guardar">
+        {{ editandoId() === null ? '➕ Crear estudiante' : '💾 Guardar cambios' }}
+      </button>
+      @if (editandoId() !== null) {
+        <button type="button" class="btn-cancelar" (click)="cancelar()">Cancelar</button>
+      }
+    </div>
+  </form>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>NOMBRE</th>
+        <th>CURSO</th>
+        <th>ESTADO</th>
+        <th>ACCIONES</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (e of estudiantes(); track e.id) {
+        <tr [class.fila-editando]="editandoId() === e.id">
+          <td>{{ e.id }}</td>
+          <td>{{ e.nombre }}</td>
+          <td>{{ e.curso }}</td>
+          <td>
+            <span class="estado" [class.activo]="e.estado === 'Activo'" [class.inactivo]="e.estado !== 'Activo'">
+              ● {{ e.estado }}
+            </span>
+          </td>
+          <td class="acciones">
+            <button class="btn-editar" (click)="editar(e)">✏️ Editar</button>
+            <button class="btn-eliminar" (click)="eliminar(e)">🗑️ Eliminar</button>
+          </td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="5" class="vacio">No hay estudiantes registrados</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</section>
+
+<!-- ===== Modal de confirmación para eliminar ===== -->
+<!-- Solo aparece cuando porEliminar tiene un estudiante; "as e" le da un nombre corto -->
+@if (porEliminar(); as e) {
+  <!-- Fondo oscuro: un clic fuera de la ventana cancela -->
+  <div class="modal-fondo" (click)="cancelarEliminar()">
+
+    <!-- stopPropagation evita que un clic DENTRO de la ventana también la cierre -->
+    <div class="modal" role="dialog" aria-modal="true" (click)="$event.stopPropagation()">
+      <div class="modal-icono">🗑️</div>
+
+      <h2>¿Eliminar estudiante?</h2>
+      <p class="modal-texto">Estás a punto de eliminar a:</p>
+
+      <div class="modal-ficha">
+        <span class="modal-avatar">{{ e.nombre.charAt(0) }}</span>
+        <div>
+          <strong>{{ e.nombre }}</strong>
+          <span>ID {{ e.id }} · {{ e.curso }}</span>
+        </div>
+      </div>
+
+      <p class="modal-aviso">⚠️ Esta acción no se puede deshacer.</p>
+
+      <div class="modal-botones">
+        <button class="btn-modal-cancelar" (click)="cancelarEliminar()" [disabled]="eliminando()">
+          Cancelar
+        </button>
+        <button class="btn-modal-eliminar" (click)="confirmarEliminar()" [disabled]="eliminando()">
+          @if (eliminando()) {
+            <span class="spinner"></span> Eliminando...
+          } @else {
+            Sí, eliminar
+          }
+        </button>
+      </div>
+    </div>
+  </div>
+}

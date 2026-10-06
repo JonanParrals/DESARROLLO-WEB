@@ -1,0 +1,220 @@
+/* Círculo naranja del encabezado */
+.icono.naranja { background: #f97316; }
+
+/* Mensaje de éxito verde */
+.exito {
+  color: #15803d;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  padding: 10px 14px;
+  border-radius: 8px;
+}
+
+/* ===== Formulario ===== */
+.formulario {
+  background: #f8fafc;
+  border: 1px solid #e5e9f0;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+.formulario h3 { margin: 0 0 16px; color: #1e3a8a; }
+
+/* Los 3 campos en fila (o uno debajo de otro si no caben) */
+.campos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+label {
+  display: flex;
+  flex-direction: column;        /* Texto arriba, caja abajo */
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #334155;
+}
+input, select {
+  padding: 10px 14px;
+  font-size: 16px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  outline: none;
+  font-family: inherit;
+}
+input:focus, select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px #dbeafe;
+}
+/* Borde rojo si el campo es inválido y ya fue tocado (clases que pone Angular solo) */
+input.ng-invalid.ng-touched { border-color: #dc2626; }
+.requerido { color: #dc2626; font-weight: 400; }
+
+/* Botones del formulario */
+.acciones-form { display: flex; gap: 12px; }
+.btn-guardar, .btn-cancelar {
+  border: none;
+  border-radius: 8px;
+  padding: 11px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn-guardar { background: #2563eb; color: #fff; }
+.btn-guardar:hover { background: #1d4ed8; }
+.btn-cancelar { background: #e2e8f0; color: #334155; }
+.btn-cancelar:hover { background: #cbd5e1; }
+
+/* ===== Tabla ===== */
+.fila-editando td { background: #fff7ed; }   /* Fila en edición resaltada en naranja claro */
+
+.acciones { display: flex; gap: 8px; }
+.btn-editar, .btn-eliminar {
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn-editar { background: #dbeafe; color: #1d4ed8; }
+.btn-editar:hover { background: #bfdbfe; }
+.btn-eliminar { background: #fee2e2; color: #b91c1c; }
+.btn-eliminar:hover { background: #fecaca; }
+
+/* Etiquetas de estado */
+.estado { padding: 6px 12px; border-radius: 8px; font-size: 14px; }
+.activo { background: #dcfce7; color: #15803d; }
+.inactivo { background: #fef3c7; color: #b45309; }
+/* ===== Modal de confirmación ===== */
+
+/* Fondo oscuro y difuminado que cubre toda la pantalla */
+.modal-fondo {
+  position: fixed;
+  inset: 0;                                  /* Ocupa toda la ventana */
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(4px);                /* Difumina lo que está detrás */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 1000;                             /* Por encima de todo */
+  animation: aparecer 0.2s ease-out;
+}
+
+/* Ventana blanca central */
+.modal {
+  background: #fff;
+  border-radius: 20px;
+  padding: 32px 28px 24px;
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+  box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.35);
+  animation: entrar 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);   /* Entra con un pequeño rebote */
+}
+
+/* Círculo rojo con la papelera, que "late" suavemente */
+.modal-icono {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  background: #fee2e2;
+  box-shadow: 0 0 0 10px #fef2f2;            /* Aro exterior más claro */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  animation: latido 1.6s ease-in-out infinite;
+}
+
+.modal h2 { margin: 0 0 6px; font-size: 24px; color: #0f172a; }
+.modal-texto { margin: 0 0 16px; color: #64748b; }
+
+/* Ficha del estudiante: avatar + nombre + datos */
+.modal-ficha {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-align: left;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 12px 16px;
+}
+.modal-avatar {                              /* Círculo con la inicial del nombre */
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f97316, #ef4444);
+  color: #fff;
+  font-weight: 700;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.modal-ficha strong { display: block; font-size: 17px; color: #0f172a; }
+.modal-ficha div span { font-size: 14px; color: #64748b; }
+
+/* Aviso amarillo */
+.modal-aviso {
+  margin: 16px 0 24px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: #fffbeb;
+  color: #b45309;
+  font-size: 14px;
+}
+
+/* Botones del modal, del mismo ancho */
+.modal-botones { display: flex; gap: 12px; }
+.btn-modal-cancelar,
+.btn-modal-eliminar {
+  flex: 1;
+  border: none;
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: filter 0.15s, background 0.15s, transform 0.1s;
+}
+.btn-modal-cancelar { background: #f1f5f9; color: #334155; }
+.btn-modal-cancelar:hover:not(:disabled) { background: #e2e8f0; }
+.btn-modal-eliminar {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.35);
+}
+.btn-modal-eliminar:hover:not(:disabled) { filter: brightness(1.08); }
+.btn-modal-cancelar:active:not(:disabled),
+.btn-modal-eliminar:active:not(:disabled) { transform: scale(0.97); }   /* Se "hunde" al hacer clic */
+.btn-modal-cancelar:disabled,
+.btn-modal-eliminar:disabled { opacity: 0.7; cursor: wait; }
+
+/* Círculo girando mientras elimina */
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: girar 0.7s linear infinite;
+}
+
+/* ===== Animaciones ===== */
+@keyframes aparecer { from { opacity: 0; } to { opacity: 1; } }
+@keyframes entrar {
+  from { opacity: 0; transform: scale(0.9) translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes latido { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.06); } }
+@keyframes girar { to { transform: rotate(360deg); } }

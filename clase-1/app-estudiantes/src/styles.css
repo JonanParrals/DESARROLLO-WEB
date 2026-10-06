@@ -1,0 +1,69 @@
+/* Estilos globales: afectan a TODA la aplicación */
+
+body {
+  margin: 0;                     /* Quita el borde blanco que el navegador pone por defecto */
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;   /* Letra moderna en vez de Times */
+  background: #f4f7fb;           /* Fondo gris muy claro, para que resalten las tarjetas blancas */
+  color: #0f172a;
+}
+
+/* Hace que padding y bordes se incluyan en el ancho (evita desbordes) */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+/* ===== Estilos compartidos por las pantallas de ejercicios ===== */
+
+.card {
+  background: #fff;
+  border: 1px solid #e5e9f0;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+}
+.card-header { display: flex; align-items: center; gap: 20px; margin-bottom: 20px; flex-wrap: wrap; }
+.titulos { flex: 1; }
+.titulos h1 { margin: 0; font-size: 32px; }
+.subtitulo { margin: 4px 0 0; color: #64748b; font-size: 18px; }
+
+/* Círculo de color con ícono */
+.icono {
+  width: 72px; height: 72px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 32px; flex-shrink: 0;
+}
+.icono.verde { background: #22c55e; }
+.icono.morado { background: #6d28d9; }
+
+/* Recuadro del endpoint */
+.endpoint {
+  display: flex; gap: 14px; align-items: center;
+  background: #eff6ff; border-radius: 12px; padding: 14px 18px; max-width: 380px;
+}
+.endpoint-icono {
+  width: 48px; height: 48px; border: 1px solid #bfdbfe; border-radius: 10px;
+  background: #fff; color: #2563eb; font-weight: bold;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.endpoint strong { color: #2563eb; font-size: 18px; }
+.endpoint p { margin: 4px 0 0; color: #475569; font-size: 14px; }
+
+/* Tabla */
+table {
+  width: 100%; border-collapse: separate; border-spacing: 0;
+  border: 1px solid #e5e9f0; border-radius: 12px; overflow: hidden;
+}
+th { background: #f1f5f9; text-align: left; padding: 14px 24px; font-size: 13px; color: #334155; }
+td { padding: 14px 24px; border-top: 1px solid #e5e9f0; color: #1e293b; }
+.vacio { text-align: center; color: #94a3b8; }
+
+/* Mensajes */
+.info { color: #475569; }
+.error { color: #b91c1c; background: #fef2f2; padding: 10px 14px; border-radius: 8px; }
+
+/* Enlace "Volver al inicio" */
+.volver {
+  display: inline-block; margin-bottom: 16px;
+  color: #2563eb; text-decoration: none; font-weight: 600;
+}
+.volver:hover { text-decoration: underline; }

@@ -1,0 +1,16 @@
+<!-- Barra superior azul oscuro (se ve en todas las pantallas) -->
+<header class="barra">
+  <div class="logo">🎓 <span>App Estudiantes</span></div>
+
+  <!-- Insignias de tecnologías a la derecha -->
+  <div class="tecnologias">
+    <span class="tec"><span class="badge angular">A</span> Angular 22</span>
+    <span class="separador"></span>
+    <span class="tec"><span class="badge dotnet">.NET</span> .NET 10</span>
+  </div>
+</header>
+
+<!-- Aquí Angular "inserta" la pantalla que corresponda a la ruta (Inicio, Productos, Buscar) -->
+<main class="contenido">
+  <router-outlet />
+</main>
